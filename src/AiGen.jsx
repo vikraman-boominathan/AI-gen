@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { marked } from "marked";
-// Importing marked to handle markdown parsing
 
 export default function AiGen() {
   const [description, setDescription] = useState("");

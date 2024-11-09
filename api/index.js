@@ -16,22 +16,17 @@ app.post("/api/ai", async (req, res) => {
 
   try {
     console.log(`Generating book recommendation based on: ${inputText}`);
+
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    // Define the messages format for book recommendation
-    const messages = [
+    const input = [
       {
-        role: "system",
-        content:
-          "You are a helpful assistant who suggests good books based on the topic user gives.",
-      },
-      {
-        role: "user",
-        content: `Give a good book recommendation based on ${inputText}`,
+        text: `You are a helpful assistant who suggests good books based on the topic: ${inputText}. Please recommend a good book.`,
       },
     ];
 
-    const result = await model.generateContent(messages);
+    const result = await model.generateContent(input);
+
     let responseText = result.response.text();
 
     res.json({
